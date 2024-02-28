@@ -1,0 +1,87 @@
+package main
+
+import "fmt"
+
+type Utils interface {
+	Greet()
+	Calculate(int, int) int
+}
+
+type Student struct {
+	Name string
+}
+
+type MyString string
+
+func (ms MyString) Error() string {
+	return string(ms)
+}
+
+func (ms MyString) Greet() {
+	fmt.Println("Ini dari MyString:", ms)
+}
+
+func (ms MyString) Calculate(a int, b int) int {
+	return a*b - 10
+}
+
+func (s Student) Greet() {
+	fmt.Printf("Halo nama saya %s\n", s.Name)
+}
+
+func (s Student) Calculate(a int, b int) int {
+	return a * b
+}
+
+func (s Student) PrintName() string {
+	return s.Name
+}
+
+func main() {
+
+	var s1 Student = Student{
+		Name: "John",
+	}
+
+	// fmt.Println(s1.Name)
+
+	// s1.PrintName()
+
+	_ = s1
+
+	var u1 Utils = Student{
+		Name: "Susan",
+	}
+
+	// fmt.Println(u1.Name)
+
+	// fmt.Println(u1.(Student).PrintName())
+
+	var u2 Utils = MyString("u2")
+
+	u2 = Student{
+		Name: "Rendy",
+	}
+
+	if result, ok := u2.(Student); !ok {
+		fmt.Println("invalid student type")
+	} else {
+		fmt.Println(result.PrintName())
+	}
+
+	_, _ = u1, u2
+
+	// var err error = MyString("ini error")
+
+	// fetchUtils(Student{
+	// 	Name: "Anton",
+	// })
+
+	// fetchUtils(MyString("Random String"))
+
+}
+
+func fetchUtils(util Utils) {
+	// util.Calculate(10, 20)
+	util.Greet()
+}

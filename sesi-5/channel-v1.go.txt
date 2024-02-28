@@ -1,0 +1,62 @@
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+
+	totalLoops := 10
+
+	
+
+	ch1 := make(chan int)
+
+	go func() {
+		for i := 1; i <= totalLoops; i++ {
+
+			ch1 <- i
+
+		}
+
+		close(ch1)
+	}()
+
+
+
+	for result := range ch1 {
+		fmt.Println("Result:", result)
+	}
+
+	// for i := 1; i <= totalLoops; i++ {
+
+	// 	time.Sleep(2 * time.Second)
+	// 	result := <-ch1
+	// 	fmt.Println("Result:", result)
+	// }
+
+	// ch2 := make(chan string)
+
+	// ch3 := make(chan string)
+
+	// go func() {
+	// 	ch1 <- "First Data"
+	// 	fmt.Println()
+	// }()
+	// go func() {
+	// 	ch2 <- "Second Data"
+	// }()
+	// go func() {
+	// 	ch3 <- "Third Data"
+	// }()
+
+	// value1 := <-ch1
+
+	// value2 := <-ch2
+
+	// value3 := <-ch3
+
+	// fmt.Println("value1:", value1)
+	// fmt.Println("value2:", value2)
+	// fmt.Println("value3:", value3)
+}

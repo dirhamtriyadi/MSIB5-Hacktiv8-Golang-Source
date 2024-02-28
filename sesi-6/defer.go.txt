@@ -1,0 +1,21 @@
+package main
+
+import (
+	"fmt"
+	"os"
+)
+
+func main() {
+
+	defer fmt.Println("Never going to be executed")
+
+	greet()
+	fmt.Println("Random Text")
+	os.Exit(1)
+}
+
+func greet() {
+	defer fmt.Println("After greet")
+
+	fmt.Println("Hello!!!!")
+}

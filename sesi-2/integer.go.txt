@@ -1,0 +1,49 @@
+package main
+
+import "fmt"
+
+type NewString = string
+
+type MyString string
+
+func main() {
+	var text1 string = "Random Text"
+
+	var ms MyString = "Ini mystring"
+
+	var text2 NewString = text1
+
+	var myString MyString = MyString(text1)
+
+	_, _, _ = text2, myString, ms
+
+	var isValid bool = true
+
+	fmt.Println("isValid:", isValid)
+
+	var num1 int8 = 127
+
+	var num2 uint8 = 255
+
+	var num3 uint16 = 256
+
+	var num4 uint8 = uint8(num3)
+
+	var num5 int32 = 200
+
+	var b byte = byte(num1)
+
+	var r rune = num5
+
+	fmt.Println("num1:", num1)
+
+	fmt.Println("num2:", num2)
+
+	fmt.Println("num3:", num3)
+
+	fmt.Println("num4:", num4)
+
+	fmt.Println("b:", b)
+
+	fmt.Println("r:", r)
+}

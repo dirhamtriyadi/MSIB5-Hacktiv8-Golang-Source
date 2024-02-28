@@ -1,0 +1,44 @@
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func main() {
+
+	fruits := []string{
+		"Apple", "Mango", "Durian", "Pineapple", "Watermelon", "Starfruit",
+	}
+
+	ch := make(chan string, 1000)
+
+	go func() {
+		for i := 0; i < len(fruits); i++ {
+			fmt.Println("Before sending fruit:", fruits[i])
+
+			ch <- fruits[i]
+
+			fmt.Println("After sending fruit:", fruits[i])
+
+		}
+	}()
+
+	for i := 0; i < len(fruits); i++ {
+		time.Sleep(3 * time.Second)
+
+		fruit := <-ch
+
+		fmt.Println("fruit:", fruit)
+	}
+
+	// ch1 := make(chan int, 3)
+
+	// ch1 <- 10
+
+	// ch1 <- 20
+
+	// ch1 <- 30
+
+	// ch1 <- 40
+}

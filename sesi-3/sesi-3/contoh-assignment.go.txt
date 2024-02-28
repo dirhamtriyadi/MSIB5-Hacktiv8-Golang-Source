@@ -1,0 +1,53 @@
+package main
+
+import (
+	"fmt"
+	"os"
+)
+
+type Friend struct {
+	id         uint
+	name       string
+	address    string
+	occupation string
+	reason     string
+}
+
+var friends []Friend = []Friend{
+	{
+		id:         1,
+		name:       "Anto",
+		address:    "Kuningan",
+		occupation: "Software Engineer",
+		reason:     "Karena golang laku dipasaran",
+	},
+	{
+		id:         2,
+		name:       "Yuni",
+		address:    "Cipete",
+		occupation: "QA",
+		reason:     "Karena golang populer",
+	},
+}
+
+func main() {
+	var arg = os.Args
+
+	fmt.Printf("%#v\n", arg)
+
+	// if arg {
+
+	// } else {
+	// 	findMyFriend(arg[1])
+	// }
+}
+
+func findMyFriend(name string) {
+	for _, eachFriend := range friends {
+		if name == eachFriend.name {
+			fmt.Println("ID:", eachFriend.id)
+			fmt.Println("nama:", eachFriend.name)
+			break
+		}
+	}
+}

@@ -1,0 +1,56 @@
+package main
+
+import "fmt"
+
+type UserRepo interface {
+	GetUser()
+	Greet()
+}
+
+type User struct {
+	ID   int
+	Name string
+}
+
+func (u *User) GetUser() {
+	fmt.Println(u.Name)
+}
+
+func (u *User) Greet() {
+	fmt.Println("Hello user")
+}
+
+type NewString string
+
+func (ns *NewString) ChangeValue(newValue NewString) {
+	*ns = newValue
+}
+
+func (u *User) UpdateId(newId int) {
+	u.ID = newId
+}
+
+func main() {
+	var user1 User = User{
+		ID:   1,
+		Name: "Anton",
+	}
+
+	var user2 *User = &User{}
+
+	var userRepo UserRepo = &User{}
+
+	_, _ = user2, userRepo
+
+	user1.UpdateId(23)
+
+	var ns NewString = "old string"
+
+	var str *NewString = &ns
+
+	_ = str
+
+	ns.ChangeValue("Latest string")
+
+	fmt.Println(ns)
+}

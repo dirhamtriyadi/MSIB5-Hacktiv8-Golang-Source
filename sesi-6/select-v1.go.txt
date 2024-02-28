@@ -1,0 +1,70 @@
+package main
+
+import (
+	"errors"
+	"fmt"
+	"sync"
+)
+
+type Student struct {
+	Name        string
+	isGraduated bool
+}
+
+var students []Student = []Student{
+	{
+		Name:        "John",
+		isGraduated: true,
+	},
+	{
+		Name:        "Anna",
+		isGraduated: true,
+	},
+	{
+		Name:        "Mike",
+		isGraduated: false,
+	},
+	{
+		Name:        "Anthony",
+		isGraduated: true,
+	},
+	{
+		Name:        "Nicholas",
+		isGraduated: true,
+	},
+}
+
+func main() {
+
+	errCh := make(chan error, 1)
+
+	wg := sync.WaitGroup{}
+
+	for _, student := range students {
+		wg.Add(1)
+		go func(eachStudent Student) {
+
+			if !eachStudent.isGraduated {
+				errMessage := fmt.Sprintf("invalid student '%s'", eachStudent.Name)
+				errCh <- errors.New(errMessage)
+
+			} else {
+				fmt.Println("valid student:", eachStudent.Name)
+
+			}
+
+			wg.Done()
+
+		}(student)
+	}
+
+	wg.Wait()
+
+	select {
+	case err := <-errCh:
+		fmt.Println("Rollback Process:", err)
+	default:
+		fmt.Println("Commit!!!")
+	}
+
+}

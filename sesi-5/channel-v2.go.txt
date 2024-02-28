@@ -1,0 +1,33 @@
+package main
+
+import (
+	"fmt"
+	"sync"
+)
+
+func main() {
+	totalLoops := 10
+	ch1 := make(chan int)
+
+	wg := sync.WaitGroup{}
+
+	for i := 1; i <= totalLoops; i++ {
+		wg.Add(1)
+		go func(index int) {
+			ch1 <- index
+			wg.Done()
+		}(i)
+	}
+
+	go func() {
+		wg.Wait()
+		close(ch1)
+	}()
+
+	// wg.Wait()
+	// close(ch1)
+
+	for result := range ch1 {
+		fmt.Println("Result:", result)
+	}
+}

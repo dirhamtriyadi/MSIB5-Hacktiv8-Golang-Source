@@ -1,0 +1,54 @@
+package main
+
+import (
+	"fmt"
+	"sync"
+	"time"
+)
+
+func main() {
+	var totalLoops int = 100
+
+	var wg sync.WaitGroup
+
+	// wg := sync.WaitGroup{}
+
+	var mutex sync.Mutex
+
+	var counter = 0
+
+	_, _ = wg, mutex
+
+	wg.Add(totalLoops)
+
+	for i := 1; i <= totalLoops; i++ {
+		go func() {
+			mutex.Lock()
+
+			time.Sleep(5 * time.Second)
+			counter++
+
+			mutex.Unlock()
+			wg.Done()
+		}()
+	}
+
+	wg.Wait()
+
+	fmt.Println("Counter:", counter)
+
+	// go func(indexResult int) {
+	// 	fmt.Println("Process:", indexResult)
+	// 	wg.Done()
+	// }(i)
+}
+
+func executeProcess(index int, wg *sync.WaitGroup) {
+	fmt.Println("Process:", index)
+
+	wg.Done()
+}
+
+func greet() {
+	fmt.Println("Hello World")
+}

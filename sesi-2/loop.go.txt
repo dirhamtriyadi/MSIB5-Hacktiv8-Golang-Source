@@ -1,0 +1,65 @@
+package main
+
+import "fmt"
+
+func main() {
+	// var numbers []int = []int{
+	// 	10, 20, 30,
+	// }
+
+	var multiDimensionalArr [3][]int = [3][]int{
+		{
+			10, 20, 30, 400, 500,
+		},
+		{
+			30, 40, 50,
+		},
+		{
+			230, 650, 120,
+		},
+	}
+
+	// for parentIndex, parentValue := range multiDimensionalArr {
+	// 	fmt.Printf("parentIndex: %d, parentValue: %#v\n", parentIndex, parentValue)
+	// 	for childIndex, childValue := range parentValue {
+
+	// 		if childIndex%2 != 0 {
+	// 			continue
+	// 		}
+
+	// 		fmt.Printf("childIndex: %d, childValue: %d\n", childIndex, childValue)
+
+	// 	}
+	// }
+
+outerLoop:
+	for i := 0; i < len(multiDimensionalArr); i++ {
+		for j := 0; j < len(multiDimensionalArr[i]); j++ {
+			if i == 2 {
+				break outerLoop
+			}
+
+			fmt.Printf("childIndex: %d, childValue: %d\n", j, multiDimensionalArr[i][j])
+		}
+	}
+
+	// var currentIndex = 0
+
+	// for {
+	// 	fmt.Printf("index: %d, value: %d\n", currentIndex, numbers[currentIndex])
+
+	// 	currentIndex++
+
+	// 	if (currentIndex + 1) > len(numbers) {
+	// 		break
+	// 	}
+	// }
+
+	// for i := 0; i < len(numbers); i++ {
+	// 	fmt.Printf("index: %d, value: %d\n", i, numbers[i])
+	// }
+
+	// for index, value := range numbers {
+	// 	fmt.Printf("index: %d, value: %d\n", index, value)
+	// }
+}

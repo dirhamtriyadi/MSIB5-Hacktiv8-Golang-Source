@@ -1,0 +1,57 @@
+package main
+
+import "fmt"
+
+func main() {
+
+	var randomData interface{} = "Text"
+
+	randomData = 20
+
+	var a string = ""
+
+	if result, ok := randomData.(string); ok {
+		a = result
+	}
+
+	_ = a
+
+	randomData = 10
+
+	randomData = []string{"a", "b", "c"}
+
+	randomData = map[string]int{
+		"Ana":  10,
+		"Bela": 20,
+	}
+
+	randomData = struct {
+		score int
+	}{score: 10}
+
+	// fmt.Println(randomData.(map[string]int)["Ana"])
+
+	var bigData []interface{} = []interface{}{
+		"data one",
+		30,
+		true,
+		[]string{"a", "b"},
+	}
+
+	for _, eachBigData := range bigData {
+
+		switch v := eachBigData.(type) {
+		case int:
+			fmt.Printf("%d adalah integer\n", v)
+		case string:
+			fmt.Printf("%s adalah string\n", v)
+		case []string:
+			fmt.Printf("%#v adalah slice of string\n", v)
+		default:
+			fmt.Println("unknown data type")
+		}
+	}
+
+	_ = bigData
+
+}

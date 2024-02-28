@@ -1,0 +1,36 @@
+package main
+
+import "fmt"
+
+func main() {
+	var students []string = []string{
+		"John Doe",
+		"Herman",
+		"Anto",
+	}
+
+	// if amount := len(students); amount < 2 {
+	// 	fmt.Println(amount)
+	// 	fmt.Println("Jumlah students terlalu sedikit")
+	// } else if amount%2 == 0 {
+	// 	fmt.Println("Jumlah nya ganjil")
+	// } else {
+	// 	fmt.Println(amount)
+	// 	fmt.Println("Jumlah students sudah banyak")
+	// }
+
+	switch {
+	case len(students) <= 3:
+		fmt.Println("Jumlah students sudah banyak")
+		fallthrough
+	case len(students) <= 2:
+		fmt.Println("Jumlah students sedikit")
+	case len(students) <= 1:
+		fmt.Println("Jumlah students sedikit banget")
+	default:
+		{
+			fmt.Println("Jumlah students tidak terdeteksi")
+		}
+
+	}
+}

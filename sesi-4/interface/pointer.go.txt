@@ -1,0 +1,31 @@
+package main
+
+import "fmt"
+
+func changeValue(str *string, newValue string) {
+	*str = newValue
+}
+
+func main() {
+
+	var car string = "Honda"
+
+	changeValue(&car, "Toyota")
+
+	fmt.Println("car:", car)
+
+	var a string = "First Text"
+
+	var b *string = &a
+
+	*b = "Latest Text"
+
+	fmt.Println("a:", a)
+
+	// fmt.Println("a:", &a)
+	fmt.Println("b:", *b)
+
+	// fmt.Println("a:", a)
+	// fmt.Println("b:", b)
+
+}

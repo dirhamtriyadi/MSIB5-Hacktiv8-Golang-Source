@@ -1,0 +1,47 @@
+package main
+
+import "fmt"
+
+func main() {
+	var scores map[string]int = map[string]int{}
+
+	scores["jonathan"] = 100
+
+	scores["annabel"] = 89
+
+	// delete(scores, "Annabel")
+
+	// fmt.Println("scores:", scores)
+
+	value, isExists := scores["annabel"]
+
+	_, _ = value, isExists
+
+	// fmt.Println(value, isExists)
+
+	var footballTeam map[string][]string = map[string][]string{
+		"ac-milan": {
+			"Cafu",
+			"Dida",
+			"Ronaldo Nazario",
+		},
+		"chelsea": {
+			"Drogba",
+		},
+	}
+
+	var footBallPlayers map[string]map[string]string = map[string]map[string]string{
+		"Ricardo Kaka": {
+			"totalGoals": "120",
+			"height":     "1.89",
+		},
+		"Romario": {
+			"totalGoals": "120",
+			"height":     "1.89",
+		},
+	}
+
+	fmt.Println(footBallPlayers["Ricardo Kaka"]["totalGoals"])
+
+	_ = footballTeam
+}

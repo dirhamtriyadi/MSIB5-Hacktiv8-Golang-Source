@@ -1,0 +1,119 @@
+package main
+
+import "fmt"
+
+type MyNumber uint
+
+type Parent struct {
+	name string
+}
+
+type Person struct {
+	name         string
+	age          uint8
+	address      string
+	favoriteFood string
+	mother       Parent
+	father       Parent
+	child        struct {
+		name string
+		age  uint8
+	}
+	greet func()
+}
+
+func (m MyNumber) Sum(num uint) {
+	result := m + MyNumber(num)
+	fmt.Println("result:", result)
+}
+
+func (p Parent) SayHello() {
+	fmt.Printf("Hallo aku adalah orangtua yang bernama: %s\n", p.name)
+}
+
+func (m MyNumber) SayHello() {
+
+}
+
+func (p Person) SayHello() {
+
+	fmt.Printf("Hallo semuanya, namaku %s\n", p.name)
+	// fmt.Printf("p: %+v\n", p)
+}
+
+func main() {
+	var num MyNumber = 10
+
+	_ = num
+
+	// num.Sum(20)
+
+	var p1 Person = Person{
+		name:    "John",
+		age:     45,
+		address: "Rawamangun",
+		mother: Parent{
+			name: "Ani",
+		},
+		father: Parent{
+			name: "Bambang",
+		},
+		greet: func() {
+			fmt.Println("hallo semuanya")
+		},
+		child: struct {
+			name string
+			age  uint8
+		}{
+			name: "Anak John",
+			age:  13,
+		},
+	}
+
+	// p1.mother.SayHello()
+
+	// p1.father.SayHello()
+
+	var p2 Person = Person{
+		name: "Yuni",
+	}
+
+	p2.child = struct {
+		name string
+		age  uint8
+	}{
+		name: "Anak Yuni",
+		age:  23,
+	}
+
+	_ = p2
+
+	// p2.SayHello()
+
+	p1.age = p1.age + 1
+
+	p1.favoriteFood = "Pizza"
+
+	// fmt.Printf("%+v\n", p1)
+
+	p1.father.name = "Bambang Hermanto"
+
+	// fmt.Printf("%+v\n", p1)
+
+	// p1.greet()
+
+	p1.SayHello()
+
+	var people []Person = []Person{
+		Person{
+			name: "Yudi",
+		},
+		Person{
+			name: "Andi",
+		},
+	}
+
+	for _, eachPerson := range people {
+		fmt.Printf("eachPerson: %+v\n", eachPerson)
+	}
+}

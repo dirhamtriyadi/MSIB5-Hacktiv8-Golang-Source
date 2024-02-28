@@ -1,0 +1,29 @@
+package main
+
+import "fmt"
+
+type MyFunc func(uint) bool
+
+func main() {
+
+	// var result MyFunc = isOddNumber()
+
+	var result bool = isOddNumber()(9)
+
+	// result(9)
+
+	// fmt.Println(result(9))
+
+	_ = result
+
+	func(message string) {
+		fmt.Println("message:", message)
+	}("Hello World")
+}
+
+func isOddNumber() MyFunc {
+
+	return func(param uint) bool {
+		return param%2 != 0
+	}
+}

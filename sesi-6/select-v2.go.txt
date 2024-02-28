@@ -1,0 +1,36 @@
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func main() {
+
+	ch1 := make(chan string)
+
+	ch2 := make(chan int)
+
+	go func() {
+		time.Sleep(3 * time.Second)
+
+		ch1 <- "String channel"
+	}()
+
+	go func() {
+		time.Sleep(1 * time.Second)
+
+		ch2 <- 10
+	}()
+
+	for i := 0; i < 2; i++ {
+		select {
+		case receivedValueFromCh1 := <-ch1:
+			fmt.Println(receivedValueFromCh1)
+		case receivedValueFromCh2 := <-ch2:
+			fmt.Println(receivedValueFromCh2)
+		default:
+			fmt.Println("no channel sends data")
+		}
+	}
+}

@@ -1,0 +1,44 @@
+package main
+
+import (
+	"errors"
+	"fmt"
+)
+
+type Person struct {
+	Name string
+}
+
+func (p Person) Greet() {
+	fmt.Println("Hello!!!")
+}
+
+func main() {
+	// defer catchErr()
+	var person *Person = nil
+
+	person.Greet()
+
+	// password := "123"
+
+	// if err := isValidPassword(password); err != nil {
+	// 	panic(err)
+	// }
+
+}
+
+func catchErr() {
+	if r := recover(); r != nil {
+		fmt.Println("panic error:", r)
+	} else {
+		fmt.Println("no panic :)")
+	}
+}
+
+func isValidPassword(password string) error {
+	if len([]rune(password)) < 5 {
+		return errors.New("invalid password")
+	}
+
+	return nil
+}
